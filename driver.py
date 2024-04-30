@@ -26,7 +26,7 @@ omega = 1.0
 lr = 1e-1
 
 env = MultiplicativeGaussianControlNoiseEnvironment(a, b, beta, lmbda)
-U = LearnableWeightM2P1LinearModule()
+U = SlidingWindowMLP()#LearnableWeightM2P1LinearModule()#
 U_optim = torch.optim.Adam(U.parameters(), lr=lr)  # Why are we using Adam instead of SGD? See below
 policy = AdditiveGaussianNoiseStochasticPolicy(U, U_optim, omega)
 agent = PolicyGradientAgent(policy)
